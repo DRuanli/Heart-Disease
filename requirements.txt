@@ -10,3 +10,5 @@ ensure==1.0.2
 joblib
 types-PyYAML
 gdown>=4.4.0
+imbalanced-learn
+optuna

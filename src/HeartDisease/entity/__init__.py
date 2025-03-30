@@ -38,3 +38,13 @@ class DataTransformationConfig:
     train_data_path: Path
     test_data_path: Path
     preprocessor_path: Path
+
+
+@dataclass(frozen=True)
+class ModelTrainerConfig:
+    """
+    Configuration for model training.
+    """
+    root_dir: Path
+    trained_model_path: Path
+    metrics_path: Path

@@ -1,6 +1,11 @@
 from src.HeartDisease.constants import *
 from src.HeartDisease.utils import read_yaml, create_directories
-from src.HeartDisease.entity import DataIngestionConfig, DataValidationConfig, DataTransformationConfig
+from src.HeartDisease.entity import (
+    DataIngestionConfig,
+    DataValidationConfig,
+    DataTransformationConfig,
+    ModelTrainerConfig
+)
 from pathlib import Path
 
 
@@ -94,3 +99,26 @@ class ConfigurationManager:
         )
 
         return data_transformation_config
+
+    def get_model_trainer_config(self) -> ModelTrainerConfig:
+        """
+        Get model trainer configuration.
+
+        Returns:
+            ModelTrainerConfig: Model trainer configuration
+        """
+        config = self.config.model_trainer
+
+        create_directories([
+            config.root_dir,
+            Path(config.trained_model_path).parent,
+            Path(config.metrics_path).parent
+        ])
+
+        model_trainer_config = ModelTrainerConfig(
+            root_dir=Path(config.root_dir),
+            trained_model_path=Path(config.trained_model_path),
+            metrics_path=Path(config.metrics_path)
+        )
+
+        return model_trainer_config

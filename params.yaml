@@ -6,7 +6,29 @@ target_column: target
 
 # Model training parameters
 model_params:
-  # Will be expanded in later stages
+  # Split parameters
   test_size: 0.2
+
+  # Random Forest parameters
   n_estimators: 100
   max_depth: 10
+  min_samples_split: 2
+  min_samples_leaf: 1
+
+  # Other models to try
+  models:
+    RandomForest:
+      n_estimators: 100
+      max_depth: 10
+      min_samples_split: 2
+      min_samples_leaf: 1
+
+    LogisticRegression:
+      C: 1.0
+      max_iter: 1000
+      penalty: 'l2'
+
+    SVC:
+      C: 1.0
+      kernel: 'rbf'
+      probability: true
