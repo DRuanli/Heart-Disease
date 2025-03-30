@@ -1,6 +1,6 @@
 from src.HeartDisease.constants import *
 from src.HeartDisease.utils import read_yaml, create_directories
-from src.HeartDisease.entity import DataIngestionConfig
+from src.HeartDisease.entity import DataIngestionConfig, DataValidationConfig
 from pathlib import Path
 
 
@@ -44,3 +44,24 @@ class ConfigurationManager:
         )
 
         return data_ingestion_config
+
+    def get_data_validation_config(self) -> DataValidationConfig:
+        """
+        Get data validation configuration.
+
+        Returns:
+            DataValidationConfig: Data validation configuration
+        """
+        config = self.config.data_validation
+
+        create_directories([config.root_dir])
+
+        data_validation_config = DataValidationConfig(
+            root_dir=Path(config.root_dir),
+            data_dir=Path(config.data_dir),
+            status_file=Path(config.status_file),
+            required_files=config.required_files,
+            schema_file=Path(config.schema_file)
+        )
+
+        return data_validation_config

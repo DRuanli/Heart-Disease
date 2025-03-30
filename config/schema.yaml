@@ -1,0 +1,51 @@
+columns:
+  age: int
+  sex: int
+  cp: int
+  trestbps: int
+  chol: int
+  fbs: int
+  restecg: int
+  thalach: int
+  exang: int
+  oldpeak: float
+  slope: int
+  ca: int
+  thal: int
+  target: int
+
+numerical_columns:
+  - age
+  - trestbps
+  - chol
+  - thalach
+  - oldpeak
+
+categorical_columns:
+  - sex
+  - cp
+  - fbs
+  - restecg
+  - exang
+  - slope
+  - ca
+  - thal
+
+target_column: target
+
+# Value range validation
+range_constraints:
+  age: [18, 100]
+  sex: [0, 1]
+  cp: [0, 3]
+  trestbps: [80, 240]
+  chol: [100, 600]
+  fbs: [0, 1]
+  restecg: [0, 2]
+  thalach: [60, 220]
+  exang: [0, 1]
+  oldpeak: [0, 10]
+  slope: [0, 2]
+  ca: [0, 4]
+  thal: [0, 3]
+  target: [0, 1]
