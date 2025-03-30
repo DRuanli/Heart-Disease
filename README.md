@@ -39,7 +39,7 @@ Key features:
 
 1. Clone the repository (or download the zip file):
 ```bash
-git clone https://github.com/yourusername/Heart-Disease.git
+git clone https://github.com/DRuanli/Heart-Disease.git
 cd Heart-Disease
 ```
 
