@@ -24,3 +24,17 @@ class DataValidationConfig:
     status_file: Path
     required_files: List[str]
     schema_file: Path
+
+
+@dataclass(frozen=True)
+class DataTransformationConfig:
+    """
+    Configuration for data transformation.
+    """
+    root_dir: Path
+    data_dir: Path
+    processed_data_dir: Path
+    preprocessed_file: Path
+    train_data_path: Path
+    test_data_path: Path
+    preprocessor_path: Path

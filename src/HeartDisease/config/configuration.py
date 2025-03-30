@@ -1,6 +1,6 @@
 from src.HeartDisease.constants import *
 from src.HeartDisease.utils import read_yaml, create_directories
-from src.HeartDisease.entity import DataIngestionConfig, DataValidationConfig
+from src.HeartDisease.entity import DataIngestionConfig, DataValidationConfig, DataTransformationConfig
 from pathlib import Path
 
 
@@ -65,3 +65,32 @@ class ConfigurationManager:
         )
 
         return data_validation_config
+
+    def get_data_transformation_config(self) -> DataTransformationConfig:
+        """
+        Get data transformation configuration.
+
+        Returns:
+            DataTransformationConfig: Data transformation configuration
+        """
+        config = self.config.data_transformation
+
+        create_directories([
+            config.root_dir,
+            config.processed_data_dir,
+            Path(config.preprocessed_file).parent,
+            Path(config.train_data_path).parent,
+            Path(config.preprocessor_path).parent
+        ])
+
+        data_transformation_config = DataTransformationConfig(
+            root_dir=Path(config.root_dir),
+            data_dir=Path(config.data_dir),
+            processed_data_dir=Path(config.processed_data_dir),
+            preprocessed_file=Path(config.preprocessed_file),
+            train_data_path=Path(config.train_data_path),
+            test_data_path=Path(config.test_data_path),
+            preprocessor_path=Path(config.preprocessor_path)
+        )
+
+        return data_transformation_config
