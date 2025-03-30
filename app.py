@@ -14,7 +14,11 @@ from src.HeartDisease.pipeline.stage_05_model_deployment import main as deploy_m
 from src.HeartDisease.components.model_deployment import PredictionPipeline
 from src.HeartDisease.config.configuration import ConfigurationManager
 
-app = Flask(__name__)
+# Get the current directory where app.py is located
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+TEMPLATES_DIR = os.path.join(BASE_DIR, 'templates')
+
+app = Flask(__name__, template_folder=TEMPLATES_DIR)
 
 # Configure logging
 logging.basicConfig(
@@ -130,12 +134,13 @@ def api_batch_predict():
 
 
 if __name__ == '__main__':
-    # Create templates directory if it doesn't exist
-    os.makedirs('templates', exist_ok=True)
+    # Create templates directory using absolute path
+    os.makedirs(TEMPLATES_DIR, exist_ok=True)
 
     # Create index.html if it doesn't exist
-    if not os.path.exists('templates/index.html'):
-        with open('templates/index.html', 'w') as f:
+    index_html_path = os.path.join(TEMPLATES_DIR, 'index.html')
+    if not os.path.exists(index_html_path):
+        with open(index_html_path, 'w') as f:
             f.write("""<!DOCTYPE html>
 <html>
 <head>
@@ -209,10 +214,12 @@ if __name__ == '__main__':
     </div>
 </body>
 </html>""")
+        logging.info(f"Created template: {index_html_path}")
 
     # Create result.html if it doesn't exist
-    if not os.path.exists('templates/result.html'):
-        with open('templates/result.html', 'w') as f:
+    result_html_path = os.path.join(TEMPLATES_DIR, 'result.html')
+    if not os.path.exists(result_html_path):
+        with open(result_html_path, 'w') as f:
             f.write("""<!DOCTYPE html>
 <html>
 <head>
@@ -300,10 +307,12 @@ if __name__ == '__main__':
     </div>
 </body>
 </html>""")
+        logging.info(f"Created template: {result_html_path}")
 
     # Create error.html if it doesn't exist
-    if not os.path.exists('templates/error.html'):
-        with open('templates/error.html', 'w') as f:
+    error_html_path = os.path.join(TEMPLATES_DIR, 'error.html')
+    if not os.path.exists(error_html_path):
+        with open(error_html_path, 'w') as f:
             f.write("""<!DOCTYPE html>
 <html>
 <head>
@@ -360,6 +369,7 @@ if __name__ == '__main__':
     </div>
 </body>
 </html>""")
+        logging.info(f"Created template: {error_html_path}")
 
     # Run the app
-    app.run(debug=True, host='0.0.0.0', port=5002)
+    app.run(debug=True, host='0.0.0.0', port=5001)
