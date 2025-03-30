@@ -12,3 +12,4 @@ types-PyYAML
 gdown>=4.4.0
 imbalanced-learn
 optuna
+flask

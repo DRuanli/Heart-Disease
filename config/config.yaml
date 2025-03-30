@@ -26,3 +26,10 @@ model_trainer:
   root_dir: artifacts/model_trainer
   trained_model_path: artifacts/model_trainer/model.pkl
   metrics_path: artifacts/model_trainer/metrics.json
+
+model_deployment:
+  root_dir: artifacts/model_deployment
+  trained_model_path: artifacts/model_trainer/model.pkl
+  preprocessor_path: artifacts/data_transformation/preprocessor/preprocessor.pkl
+  schema_file: config/schema.yaml
+  prediction_pipeline_path: artifacts/model_deployment/prediction_pipeline.pkl

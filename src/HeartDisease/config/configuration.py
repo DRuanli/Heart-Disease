@@ -4,7 +4,8 @@ from src.HeartDisease.entity import (
     DataIngestionConfig,
     DataValidationConfig,
     DataTransformationConfig,
-    ModelTrainerConfig
+    ModelTrainerConfig,
+    ModelDeploymentConfig
 )
 from pathlib import Path
 
@@ -122,3 +123,27 @@ class ConfigurationManager:
         )
 
         return model_trainer_config
+
+    def get_model_deployment_config(self) -> ModelDeploymentConfig:
+        """
+        Get model deployment configuration.
+
+        Returns:
+            ModelDeploymentConfig: Model deployment configuration
+        """
+        config = self.config.model_deployment
+
+        create_directories([
+            config.root_dir,
+            Path(config.prediction_pipeline_path).parent
+        ])
+
+        model_deployment_config = ModelDeploymentConfig(
+            root_dir=Path(config.root_dir),
+            trained_model_path=Path(config.trained_model_path),
+            preprocessor_path=Path(config.preprocessor_path),
+            schema_file=Path(config.schema_file),
+            prediction_pipeline_path=Path(config.prediction_pipeline_path)
+        )
+
+        return model_deployment_config

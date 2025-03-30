@@ -48,3 +48,15 @@ class ModelTrainerConfig:
     root_dir: Path
     trained_model_path: Path
     metrics_path: Path
+
+
+@dataclass(frozen=True)
+class ModelDeploymentConfig:
+    """
+    Configuration for model deployment.
+    """
+    root_dir: Path
+    trained_model_path: Path
+    preprocessor_path: Path
+    schema_file: Path
+    prediction_pipeline_path: Path
